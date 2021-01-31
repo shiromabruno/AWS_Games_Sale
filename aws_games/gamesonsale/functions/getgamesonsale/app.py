@@ -14,7 +14,7 @@ def lambda_handler(event, context):
     listagames = json.loads(game_api_response.content)
     return listagames
 
-# test para ver a resposta
+# test para ver a resposta printada
 #    [print(cadagame) for cadagame in listagames]
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=D:\Projetos\AWS_Curso\projeto\projetocurso\gamesonsale\venv"
+set "VIRTUAL_ENV=D:\Projetos\AWS_Curso\projeto\aws_games\gamesonsale\venv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"

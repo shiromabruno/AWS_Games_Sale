@@ -27,7 +27,7 @@ function global:deactivate ([switch]$NonDestructive) {
 
 deactivate -nondestructive
 
-$env:VIRTUAL_ENV="D:\Projetos\AWS_Curso\projeto\projetocurso\gamesonsale\venv"
+$env:VIRTUAL_ENV="D:\Projetos\AWS_Curso\projeto\aws_games\gamesonsale\venv"
 
 # Set the prompt to include the env name
 # Make sure _OLD_VIRTUAL_PROMPT is global
