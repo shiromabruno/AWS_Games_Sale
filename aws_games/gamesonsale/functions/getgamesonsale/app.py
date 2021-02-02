@@ -32,6 +32,8 @@ def lambda_handler(event, context):
     return list(map(convert_fields_to_float, listagames))
  #   return listagames
 
+# print(json.dumps(lambda_handler({},{})))
+
 # todos os campos como 'blabla'
 # internalName = NARUTOTOBORUTOSHINOBISTRIKERDELUXEEDITION
 # title = Naruto to Boruto Shinobi Striker - Deluxe Edition

@@ -1,0 +1,54 @@
+{
+    "Comment": "State machine - GamesOnSale.",
+    "StartAt": "GetGamesOnSale",
+    "States": {
+        "GetGamesOnSale": {
+            "Type": "Pass",
+            "Next": "MapGames"
+        },        
+        "MapGames": {
+            "Type": "Map",
+            "MaxConcurrency": 2,
+            "Next": "Final State",
+            "Iterator": {
+                "StartAt": "CheckingSavings",
+                "States": {
+                    "CheckingSavings": {
+                        "Type": "Choice",
+                        "Choices": [
+                            {
+                                "Variable": "$.savings",
+                                "NumericEquals": 100,
+                                "Next": "NotifyFreeGame"
+                            },
+                            {
+                                "Variable": "$.savings",
+                                "NumericGreaterThanEquals": 85,
+                                "Next": "SaveGoodOffer"
+                            }
+                        ],
+                        "Default": "DiscardBadOffer"
+                    },
+                    "NotifyFreeGame": {
+                        "Type": "Pass",
+                        "Next": "SaveGoodOffer"
+                    },
+                    "SaveGoodOffer": {
+                        "Type": "Pass",
+                        "Result": "Game saved (good offer)",
+                        "End": true
+                    },
+                    "DiscardBadOffer": {
+                        "Type": "Pass",
+                        "Result": "Game discarded (bad offer)",
+                        "End": true
+                    }
+                }
+            }
+        },
+        "Final State": {
+            "Type": "Pass",
+            "End": true
+        }
+    }
+}
