@@ -1,5 +1,7 @@
 # tem um arquivo requirements.txt que indica pra funcao lambda quais libs estamos usando que nao eh BUILT IN, no caso eh o request
 # coisa do python
+from datetime import datetime
+
 from requests import get
 import json
 from uuid import uuid4
@@ -10,7 +12,8 @@ def create_payload(game, moedabrl):
         'id': str(uuid4()),
         'title': game.get("title"),
         'normalPrice': "{:.2f}".format(game.get('normalPrice') * moedabrl),
-        'salePrice':  "{:.2f}".format(game.get('salePrice') * moedabrl)
+        'salePrice':  "{:.2f}".format(game.get('salePrice') * moedabrl),
+        'timeStamp': datetime.now().isoformat()
     }
 
 def lamda_handler(event, context):

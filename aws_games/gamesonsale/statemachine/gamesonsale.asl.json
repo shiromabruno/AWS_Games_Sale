@@ -30,13 +30,40 @@
                         "Default": "DiscardBadOffer"
                     },
                     "NotifyFreeGame": {
-                        "Type": "Pass",
+                        "Type": "Task",
+                        "Resource": "arn:aws:states:::sns:publish",
+                        "Parameters": {
+                            "TopicArn": "${FreeGameSnsTopicArn}",
+                            "Message": {
+                                "Input.$": "$"
+                            }
+                        },
                         "Next": "SaveGoodOffer"
                     },
                     "SaveGoodOffer": {
-                        "Type": "Pass",
-                        "Result": "Game saved (good offer)",
-                        "End": true
+                        "Type": "Task",
+                        "Resource": "${DDBPutItem}",
+                        "Parameters": {
+                            "TableName": "${DDBTable}",
+                            "Item": {
+                                "Id": {
+                                    "S.$": "$.id"
+                                },
+                                "Title": {
+                                    "S.$": "$.title"
+                                },
+                                "NormalPrice": {
+                                    "N.$": "$.normalPrice"
+                                },
+                                "SalePrice": {
+                                    "N.$": "$.salePrice"
+                                },
+                                "TimeStamp": {
+                                    "S.$": "$.timeStamp"
+                                }
+                            }
+                        },
+                        "Next": "NextState"
                     },
                     "DiscardBadOffer": {
                         "Type": "Pass",
