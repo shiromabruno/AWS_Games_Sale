@@ -3,7 +3,18 @@
     "StartAt": "GetGamesOnSale",
     "States": {
         "GetGamesOnSale": {
-            "Type": "Pass",
+            "Type": "Task",
+            "Resource": "${GetGamesOnSaleFunctionArn}",
+            "Retry": [
+                {
+                    "ErrorEquals": [
+                        "States.TaskFailed"
+                    ],
+                    "IntervalSeconds": 15,
+                    "BackoffRate": 1.5,
+                    "MaxAttempts": 5
+                }
+            ],
             "Next": "MapGames"
         },        
         "MapGames": {
@@ -24,7 +35,7 @@
                             {
                                 "Variable": "$.savings",
                                 "NumericGreaterThanEquals": 85,
-                                "Next": "SaveGoodOffer"
+                                "Next": "ConvertCurrency"
                             }
                         ],
                         "Default": "DiscardBadOffer"
@@ -38,6 +49,21 @@
                                 "Input.$": "$"
                             }
                         },
+                        "Next": "ConvertCurrency"
+                    },
+                    "ConvertCurrency": {
+                        "Type": "Task",
+                        "Resource": "${ConvertCurrencyFunctionArn}",
+                        "Retry": [
+                            {
+                                "ErrorEquals": [
+                                    "States.TaskFailed"
+                                ],
+                                "IntervalSeconds": 15,
+                                "BackoffRate": 1.5,
+                                "MaxAttempts": 5
+                            }
+                        ],
                         "Next": "SaveGoodOffer"
                     },
                     "SaveGoodOffer": {
@@ -63,7 +89,17 @@
                                 }
                             }
                         },
-                        "Next": "NextState"
+                        "Retry": [
+                            {
+                                "ErrorEquals": [
+                                    "States.TaskFailed"
+                                ],
+                                "IntervalSeconds": 20,
+                                "BackoffRate": 5,
+                                "MaxAttempts": 10
+                            }
+                        ],
+                        "End": true
                     },
                     "DiscardBadOffer": {
                         "Type": "Pass",
