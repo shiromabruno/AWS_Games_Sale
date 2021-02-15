@@ -4,7 +4,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   GamesOnSaleApplication
   Essa aplicacao envia mensagens SNS a respeito de jogos gratuitos e armazena estas e outras
-  boas promocoes em uma tabela do DynamoDB
+  boas promocoes em uma tabela do DynamoDB. Shiroma
   
 Resources:
   GamesOnSaleStateMachine:
