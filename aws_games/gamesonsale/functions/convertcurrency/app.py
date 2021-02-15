@@ -16,7 +16,7 @@ def create_payload(game, moedabrl):
         'timeStamp': datetime.now().isoformat()
     }
 
-def lamda_handler(event, context):
+def lambda_handler(event, context):
     params = {'base': 'USD'}
     currency_api_response = get("https://api.exchangeratesapi.io/latest", params=params)
     # o event debaixo sera o proprio game recebido

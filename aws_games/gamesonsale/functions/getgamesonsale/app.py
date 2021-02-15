@@ -32,7 +32,7 @@ def lambda_handler(event, context):
     return list(map(convert_fields_to_float, listagames))
  #   return listagames
 
-# print(json.dumps(lambda_handler({},{})))
+ # print(json.dumps(lambda_handler({},{})))
 
 # todos os campos como 'blabla'
 # internalName = NARUTOTOBORUTOSHINOBISTRIKERDELUXEEDITION
@@ -58,8 +58,8 @@ def lambda_handler(event, context):
 # test para ver a resposta printada dentro dessa funcao
 #    [print(cadagame) for cadagame in listagames]
 
- # DELETAR if __name__ == "__main__":
+#deletarif __name__ == "__main__":
     # passando nada em event e context, codigo abaixo eh se o print tiver na funcao
     # lambda_handler({}, {})
     # codigo abaixo faz o print
-# DELETAR print (lambda_handler({}, {}))
+#deletar print (lambda_handler({}, {}))
